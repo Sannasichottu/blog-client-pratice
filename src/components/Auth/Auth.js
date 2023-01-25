@@ -4,7 +4,7 @@ import {GoogleLogin} from 'react-google-login';
 import useStyles from './styles';
 import { gapi } from "gapi-script";
 import { useHistory } from 'react-router-dom';
-import {signin, signup} from '../../actions/auth';
+//import {signin, signup} from '../../actions/auth';
 
 //import Icon from './icon'; 3.40.01
 import  LockOutlinedIcon  from '@material-ui/icons/LockOutlined';
@@ -12,30 +12,40 @@ import Input from './Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-const initialState = { firstName:'', lastName:'', email:'', password:'', confirmPassword:''}
+//const initialState = { firstName:'', lastName:'', email:'', password:'', confirmPassword:''}
 
 const Auth = () => {
 
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
-    const [formData, setFormData] = useState(initialState);
+    const [formData, setFormData] = useState([]);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if(isSignup) {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(formData);
+      /*  if(isSignup) {
+
             dispatch(signup(formData,history))
         }else {
             dispatch(signin(formData, history))
-        }
+        } */
+
     }
 
-    const handleChange = (e) => {
-        setFormData ({ ...formData, [e.target.name]: e.target.value});
+
+    const handleChange = (event) => {
+        /*setFormData ({ ...formData, [e.target.name]: e.target.value});
+        setFormData ({...formData,[e.target.name]:e.target.value})  */
+
+        const name = event.target.name;
+        const value = event.target.value;
+        console.log(name,value)
+        setFormData(values => ({...values, [name]: value}))
     }
 
     const switchMode = () => {
@@ -94,7 +104,7 @@ const Auth = () => {
                                 <Input
                                     name='lastName'
                                     label='Last Name'
-                                    handleChange={handleChange}
+                                    onChange={handleChange}
                                     half
                                 />
                             </>
@@ -102,18 +112,18 @@ const Auth = () => {
                     } <Input
                         name="email"
                         label="Email Address"
-                        handleChange={handleChange}
+                        onChange={handleChange}
                         type="email" />
                       <Input
                         name="password"
                         label="Password"
-                        handleChange={handleChange}
+                        onChange={handleChange}
                         type={showPassword ? "text" : "password"}
                         handleShowPassword={handleShowPassword} />
                       { isSignup && <Input
                         name="confirmPassword"
                         label="Repeat Password"
-                        handleChange={handleChange}
+                        onChange={handleChange}
                         type="password" /> }
                 </Grid>
                 <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit} >

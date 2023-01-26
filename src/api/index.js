@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: 'http://localhost:5000' })
+const API = axios.create({ baseURL: 'https://blog-server-pratice.vercel.app/' })
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')) {
@@ -19,5 +19,5 @@ export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 
 //User - AUTH
 
-export const signIn = (formData) => API.post('/user/signin', formData);
-export const signUp = (formData) => API.post('/user/signup', formData);
+//export const signIn = (formData) => API.post('/user/signin', formData);
+//export const signUp = (formData) => API.post('/user/signup', formData);

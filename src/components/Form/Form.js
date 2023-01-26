@@ -36,6 +36,7 @@ const Form = ({currentId, setCurrentId}) => {
     }
   };
 
+  /*
   if(!user?.result?.name) {
     return(
       <Paper className={classes.paper} >
@@ -44,7 +45,7 @@ const Form = ({currentId, setCurrentId}) => {
         </Typography>
       </Paper>
     )
-  }
+  }*/
 
 
 
